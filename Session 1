@@ -1,0 +1,86 @@
+namespace ConsoleApp1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+             //How To generate Random number
+            // Create a Random object
+
+            Random random = new Random();
+
+           // Generate random integer 
+           int number = 0;
+           number= random.Next(1,15);
+            Console.WriteLine(number);
+            Console.WriteLine(number.ToString());
+
+            // Generate random double
+            double dnumber = random.NextDouble() * 100;
+
+            //How to take input from user 
+            string name = Console.ReadLine();
+           Console.WriteLine(name);
+
+            //Assessment#3
+            Console.WriteLine("Enter Two numbers ");
+            int x = Convert.ToInt32(Console.ReadLine());
+            int y = Convert.ToInt32(Console.ReadLine());
+            int maxmummum = Math.Max(x, y);
+            Console.WriteLine(maxmummum);
+
+            //Assessment#2
+            Console.WriteLine("Enter a number ");
+            int num = Convert.ToInt32(Console.ReadLine());
+            string result = (num % 2 == 0) ? "Even" : "Odd";
+
+            //Assessment#1
+            Console.WriteLine("Enter Two numbers ");
+            int num1 = Convert.ToInt32(Console.ReadLine());
+            int num2 = Convert.ToInt32(Console.ReadLine());
+            string op = Console.ReadLine();
+            if (op == "+")
+            {
+                Console.WriteLine(num1 + num2);
+            }
+            else if (op == "-")
+            {
+                Console.WriteLine(num1 - num2);
+            }
+            else if (op == "*")
+            {
+                Console.WriteLine(num1 * num2);
+            }
+            else if (op == "/")
+            {
+                if (num2 == 0)
+                {
+                    Console.WriteLine("Cannot divide by zero");
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine(num1 / num2);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid Operator");
+            }
+
+            // Assessment#4
+            Console.WriteLine("Enter a number between 1 to 10 ");
+            int numm=Convert.ToInt32(Console.ReadLine());
+            if(numm >=1 && numm<=10)
+            {
+                Console.WriteLine("Valid");
+            }
+            else
+            {
+                Console.WriteLine("Invalid");
+            }
+
+
+        }
+    }
+}
