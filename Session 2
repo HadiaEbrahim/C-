@@ -1,0 +1,31 @@
+// Assignment#1
+do {
+    Random random = new Random();
+    int randomNumber = random.Next(1, 101);
+    Console.WriteLine("Guess a number between 1 and 100:");
+    int userGuess = 0;
+    while (userGuess != randomNumber) {
+        string input = Console.ReadLine();
+        if (int.TryParse(input, out userGuess)) {
+            if (userGuess < randomNumber) {
+                Console.WriteLine("Too low! Try again:");
+            } else if (userGuess > randomNumber) {
+                Console.WriteLine("Too high! Try again:");
+            } else {
+                Console.WriteLine("Congratulations! You've guessed the number!");
+            }
+        } else {
+            Console.WriteLine("Invalid input. Please enter a number:");
+        }
+    }
+} while (false) ;
+
+// Assignment#2
+Console.WriteLine("Enter a number to calculate the factorial");
+Console.ReadLine();
+int number = int.Parse(Console.ReadLine());
+int factorial = 1;
+for(int i=1;i<= number; i++) { 
+    factorial *= i;
+}
+Console.WriteLine(number + "!" + "=" + factorial); 
