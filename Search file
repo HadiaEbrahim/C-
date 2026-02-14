@@ -1,0 +1,255 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Xml.Linq;
+// String & substring 
+//A string variable contains a collection of characters surrounded by double quotes:
+string str = "\"Hello, World!\"";
+//String Length
+string txt = "hadia mohamed";
+Console.WriteLine("The length of the txt string is: " + txt.Length);
+//String Concatenation
+string firstName = "Hadia";
+string lastName = "Mohamed";
+string fullName = firstName + " " + lastName;
+//You can also use the string.Concat() method to concatenate two strings:
+string fullName2 = string.Concat(firstName, " ", lastName);
+//String Interpolation
+Console.WriteLine($"the full name is: {firstName} {lastName}");
+//If you add two numbers, the result will be a number:
+string X = "10";
+string Y = "20";
+string Z = X + Y;
+Console.WriteLine(Z); // Output: 1020
+//Access Strings
+string myString = "Hello";
+Console.WriteLine(myString[1]);  // Outputs "e"
+Console.WriteLine(myString[2]);  // Outputs "l"
+Console.WriteLine(myString[3]);
+Console.WriteLine(myString[4]);
+Console.WriteLine(myString[5]);
+// This will throw an exception because the index is out of range
+Console.WriteLine(myString.IndexOf("e"));  // Outputs "1"
+//substring 
+string str1 = "Hello, World!";
+string substr = str1.Substring(7, 5);
+Console.WriteLine(substr);
+// \'	'	Single quote
+// \"	"    Double quote
+// \\	\	Backslash
+string str2 ="\\hadia ebrahim";
+string str3 = "She said, \"Hello!\"";
+string str4 = "It\\'s alright.";
+// \n New Line	
+// \t	Tab	
+// \b	Backspace
+
+
+// string comparison
+string strA = "Hello";
+string strB ="world";
+bool areEqual = strA == strB; // false
+Console.WriteLine(areEqual);
+bool areNotEqual = strA != strB; // true
+bool casesensetive = string.Equals(strA, strB, StringComparison.Ordinal); // false
+Console.WriteLine(casesensetive);
+bool casesensetive2 = string.Equals(strA, strB, StringComparison.OrdinalIgnoreCase); // false
+Console.WriteLine(casesensetive2);
+bool contains = strA.Contains("ell"); // true
+Console.WriteLine(contains);
+bool startsWith = strA.StartsWith("He"); // true
+Console.WriteLine(startsWith);
+bool endsWith = strA.EndsWith("lo"); // true
+Console.WriteLine(endsWith);
+bool isNullOrEmpty = string.IsNullOrEmpty(strA); // false
+Console.WriteLine(isNullOrEmpty);
+bool caseSensitive = str1.Equals(str2);
+Console.WriteLine("Case Sensitive: " + caseSensitive);
+
+
+int result = String.Compare("apple", "banana");
+
+Console.WriteLine("Comparison Result: " + result);
+
+if (result < 0)
+Console.WriteLine("\"apple\" comes before \"banana\"");
+else if (result > 0)
+Console.WriteLine("\"apple\" comes after \"banana\"");
+else
+Console.WriteLine("\"apple\" and \"banana\" are equal");
+
+// StringComparer.CurrentCulture
+int cultureResult = StringComparer.CurrentCulture.Compare("apple", "banana");
+if (cultureResult < 0)
+    Console.WriteLine("\"apple\" comes before \"banana\" in the current culture");
+else if (cultureResult > 0)
+    Console.WriteLine("\"apple\" comes after \"banana\" in the current culture");
+else
+    Console.WriteLine("\"apple\" and \"banana\" are equal in the current culture");
+
+
+string s1 = "Hello";
+string s2 = "hello";
+string s3 = "straße";
+string s4 = "strasse";
+
+// 1. CurrentCulture (case-sensitive)
+Console.WriteLine("CurrentCulture: " +
+    StringComparer.CurrentCulture.Equals(s3, s4));
+
+// 2. CurrentCultureIgnoreCase
+Console.WriteLine("CurrentCultureIgnoreCase: " +
+    StringComparer.CurrentCultureIgnoreCase.Equals(s1, s2));
+
+// 3. InvariantCulture (case-sensitive)
+Console.WriteLine("InvariantCulture: " +
+    StringComparer.InvariantCulture.Equals(s3, s4));
+
+// 4. InvariantCultureIgnoreCase
+Console.WriteLine("InvariantCultureIgnoreCase: " +
+    StringComparer.InvariantCultureIgnoreCase.Equals(s1, s2));
+
+// 5. Ordinal (case-sensitive)
+Console.WriteLine("Ordinal: " +
+    StringComparer.Ordinal.Equals(s1, s2));
+
+// 6. OrdinalIgnoreCase
+Console.WriteLine("OrdinalIgnoreCase: " +
+    StringComparer.OrdinalIgnoreCase.Equals(s1, s2));
+
+// Character-by-Character Comparison (Custom Method)
+bool AreStringsEqual(string strA, string strB)
+{
+    if (strA.Length != strB.Length)
+        return false;
+    for (int i = 0; i < strA.Length; i++)
+    {
+        if (strA[i] != strB[i])
+            return false;
+    }
+    return true;
+}
+
+// stack 
+Stack<int> stackk= new Stack<int>();
+stackk.Push(1);
+stackk.Push(2);
+stackk.Push(3);
+stackk.Push(4);
+stackk.Push(5);
+while (stackk.Count > 0)
+{
+    int item = stackk.Pop();
+    Console.WriteLine(item);
+}
+//Performing Various Operations on Stack
+
+Stack s = new Stack();
+s.Push(1);
+s.Push("hadia");
+s.Push(3.14);
+Console.WriteLine("Stack Count: " + s.Count);
+foreach (var item in stackk)
+{
+    Console.WriteLine(item);
+}
+
+
+//Pop() Method: The Pop()method returns the object at the beginning of the stack with modification means this method removes the topmost element of the stack.
+//Peek() Method: The Peek()method returns the object at the beginning of the stack without removing it.
+//Clear() Method: The clear() is used to remove all the objects from the stack.
+// Checking the Availability of Elements in the Stack: Stack class provide Contains() method to check if the element is present in the Stack or not.
+
+
+// Queue
+//Common Operations:
+//Enqueue: Add an element to the queue.
+//Dequeue: Remove and return the first element.
+//Peek: View the first element without removing it.
+//Contains: Check if an element exists in the queue.
+Queue<int> q = new Queue<int>();
+
+// Enqueue elements into the queue
+q.Enqueue(1);
+q.Enqueue(2);
+q.Enqueue(3);
+q.Enqueue(4);
+
+// Dequeue elements from the queue
+while (q.Count > 0)
+{
+    Console.WriteLine(q.Dequeue());
+}
+
+Queue q2 = new Queue();
+
+// Adding elements to the Queue
+// Using Enqueue method
+q2.Enqueue("Geeks");
+q2.Enqueue("geeksforgeeks");
+q2.Enqueue(null);
+q2.Enqueue(1);
+q2.Enqueue(10.0);
+
+// Accessing the elements
+// of q Queue
+// Using foreach loop
+foreach (var e in q)
+{
+    Console.WriteLine(e);
+}
+
+Queue<int> q3 = new Queue<int>();
+
+// Enqueue elements into the queue
+q3.Enqueue(10);
+q3.Enqueue(20);
+q3.Enqueue(30);
+
+// Checking if the queue is not empty before
+// accessing the front element
+if (q3.Count > 0)
+{
+
+    // Peek() returns the frontmost element without
+    // removing it
+    int f = q3.Peek();
+    Console.WriteLine(
+        "The frontmost element in the queue is: "
+        + f);
+}
+else
+{
+    Console.WriteLine("The queue is empty.");
+
+}
+
+//Jagged Arrays (Array of Arrays)
+//A jagged array is an array of arrays, where each element is itself an array that can have a different length.
+//Rows are fixed at declaration, but columns can vary. It can also combine with multidimensional arrays.
+
+int[][] jaggedArr = new int[3][];
+
+// Initialize each row with different lengths
+jaggedArr[0] = new int[] { 1, 2, 3 };
+jaggedArr[1] = new int[] { 4, 5 };
+jaggedArr[2] = new int[] { 6, 7, 8, 9 };
+
+// Declaration  
+int[][] jaggedArray = new int[3][];
+
+// Initialization
+jaggedArray[0] = new int[] { 1, 2 };
+jaggedArray[1] = new int[] { 3, 4, 5 };
+jaggedArray[2] = new int[] { 6, 7, 8, 9 };
+
+// Iterating the elements
+for (int i = 0; i < jaggedArray.Length; i++)
+{
+    Console.Write("Row " + i + ": ");
+    foreach (int num in jaggedArray[i])
+        Console.Write(num + " ");
+
+    Console.WriteLine();
+}
+
