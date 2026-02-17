@@ -1,0 +1,11 @@
+// valid parentheses
+string s = Console.ReadLine();
+Stack<char> stack = new Stack<char>();
+while (true)
+{
+    if (s == "") { Console.WriteLine("true"); break; }
+    if (s.Contains("()")) s = s.Replace("()", "");
+    else if (s.Contains("{}")) s = s.Replace("{}", "");
+    else if (s.Contains("[]")) s = s.Replace("[]", "");
+    else { Console.WriteLine("false"); break; }
+}
