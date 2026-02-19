@@ -1,0 +1,25 @@
+using System.Drawing;
+
+struct Points
+{
+    public int X1;
+    public int X2;
+    public int Y1;
+    public int Y2;
+
+    public double Distance()
+    {
+        return Math.Sqrt(Math.Pow((X2-X1),2) + Math.Pow((Y2-Y1),2));
+    }
+}
+
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        Points points = new Points { X1 = 3, Y1 = 4, X2 = 7, Y2 = 1 };
+        Console.WriteLine($"Distance between points: {points.Distance()}");
+
+
+    }
+}
