@@ -1,0 +1,82 @@
+struct Rectangle
+{
+    public int Length;
+    public int Breadth;
+
+    public int Area()
+    {
+        return Length * Breadth;
+    }
+}
+
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        //Use C# TimeSpan to represent a time interval.
+        // Create a TimeSpan of 1 hour, 30 minutes, and 45 seconds.
+        TimeSpan timespan = new TimeSpan(1, 30, 44);
+        Console.WriteLine(timespan.ToString());
+        // Display the TimeSpan.
+        Console.WriteLine(TimeSpan.FromSeconds(90));
+        // Add two TimeSpan instances together.
+        TimeSpan timespan1 = new TimeSpan(2, 0, 0); // 2 hour
+        Console.WriteLine(timespan1.ToString());
+        TimeSpan timespan2 = new TimeSpan(0, 40, 0); // 40 minutes
+        Console.WriteLine(timespan2.ToString());
+        TimeSpan totalTime = timespan1 + timespan2;
+        Console.WriteLine(totalTime.ToString());
+        // Subtract one TimeSpan from another.
+        TimeSpan remainingTime = timespan1 - timespan2;
+        Console.WriteLine(remainingTime.ToString());
+
+        // TimeSpan properties
+        TimeSpan timeSpanExample = new TimeSpan(1, 30, 45,60,45);
+        Console.WriteLine($"Days: {timeSpanExample.Days}");
+        Console.WriteLine($"Hours: {timeSpanExample.Hours}");
+        Console.WriteLine($"Minutes: { timeSpanExample.Minutes} ");
+        Console.WriteLine($"Seconds: {timeSpanExample.Seconds}");
+        Console.WriteLine($"Milliseconss:{timeSpanExample.Milliseconds}");
+        Console.WriteLine($"Total Days: {timeSpanExample.TotalDays}");
+        Console.WriteLine($"Total Hours: {timeSpanExample.TotalHours}");
+        Console.WriteLine($"Total Minutes: {timeSpanExample.TotalMinutes} ");
+        Console.WriteLine($"Total Seconds: {timeSpanExample.TotalSeconds}");
+
+        //Performing arithmetic operations on C# TimeSpan :TimeSpan method
+        var timeSpanA = new TimeSpan(1, 0, 0); // 1 hour
+        var timeSpanB = new TimeSpan(0, 30, 0); // 30 minutes
+        var sum = timeSpanA.Add(timeSpanB);
+        Console.WriteLine(sum.ToString());
+        var difference = timeSpanA.Subtract(timeSpanB);
+        Console.WriteLine(difference.ToString());
+        var multiplied = timeSpanA.Multiply(2);
+        Console.WriteLine(multiplied.ToString());
+        var divided = timeSpanA.Divide(2);
+        Console.WriteLine(divided.ToString());
+
+        // Comparing C# TimeSpan object
+        var timeSpanC = new TimeSpan(1, 0, 0); // 1 hour
+        var timeSpanD = new TimeSpan(0, 45, 0); 
+        Console.WriteLine(timeSpanC.CompareTo(timeSpanD)); // Output: 1 (timeSpanC is greater than timeSpanD)
+        var t1= timeSpanC > timeSpanD; // true
+        Console.WriteLine(t1.ToString());
+        var t2= timeSpanC < timeSpanD;
+        Console.WriteLine(t2.ToString());
+        var t3= timeSpanC == timeSpanD;
+        Console.WriteLine(t3.ToString());
+        var t4= timeSpanC != timeSpanD;
+        Console.WriteLine(t4.ToString());
+
+        //In C#, a struct (structure) is a value type used to represent data that 
+        //logically belongs together.Structs are value types, meaning their data is stored inline.
+        //They may reside on the stack or heap depending on the variable’s context, making it more efficient for small,
+        //lightweight objects. Structs are best suited for representing simple entities like coordinates, points, or colors.
+        Rectangle rect = new Rectangle();
+        rect.Length = 5;
+        rect.Breadth = 10;
+
+        Console.WriteLine("Area: " + rect.Area());
+
+
+    }
+}
