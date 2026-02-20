@@ -1,0 +1,120 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+
+        Dictionary<string,string> username=new Dictionary<string,string>();
+        Dictionary<string,string> Userpin=new Dictionary<string,string>();
+        Dictionary<string,double> balance=new Dictionary<string,double>();
+        Dictionary<string ,List<string>> history=new Dictionary<string ,List<string>>();
+
+        string CurrentAccount = null;
+        while (true)
+        {
+            Console.WriteLine("1. Create Account\n2. Login\n3. Check balance\n4. Deposit money\n5. Withdraw money\n6. View transaction history\n7. Exit");
+            string Choice = Console.ReadLine();
+            if (Choice == "1")
+            {
+                string Accountno = new Random().Next(1000, 9999).ToString();
+                Console.WriteLine($"your Account number is {Accountno} .");
+
+                Console.WriteLine("Enter your name");
+                username[Accountno] = Console.ReadLine();
+
+                Console.WriteLine("enter 4 digits pins");
+                Userpin[Accountno] = Console.ReadLine();
+
+                balance[Accountno] = 0;
+                history[Accountno] = new List<string>();
+            }
+            else if (Choice == "2")
+            {
+                string loggedinaccount = " ";
+                bool islogedin = false;
+
+                Console.WriteLine("Enter Account Number");
+                string accno = Console.ReadLine();
+
+                Console.WriteLine("Enter 4 digits pin");
+                string accpin = Console.ReadLine();
+
+                if (Userpin.ContainsKey(accno) && Userpin[accno] == accpin)
+                {
+                    islogedin = true;
+                    loggedinaccount = accno;
+                    Console.WriteLine($"\nWelcome back, {username[loggedinaccount]}!");
+                    CurrentAccount = accno;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Account Number or PIN!");
+                }
+            }
+            else if (Choice == "3")
+            {
+                Console.WriteLine("enter your account number");
+                string Accountno = Console.ReadLine();
+                Console.WriteLine(balance[Accountno]);
+            }
+            else if (Choice == "4")
+            {
+                if(CurrentAccount == null)
+                {
+                    Console.WriteLine("please login first");
+                    continue;
+                }
+                Console.Write("Enter the money you want to deposit: ");
+                string input = Console.ReadLine();
+
+                if (double.TryParse(input,out double money) && money > 0)
+                {
+                    balance[CurrentAccount] += money;
+                    history[CurrentAccount].Add($"Deposited: +{money} EGP at {DateTime.Now}");
+                    Console.WriteLine($"Successfully deposited {money}. New balance: {balance[CurrentAccount]}");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid amount! Please enter a positive number.");
+                }
+
+            }
+            else if (Choice == "5")
+            {
+                if (CurrentAccount == null) { Console.WriteLine("Please login first!"); continue; }
+                Console.WriteLine("enter the amount you want to withdrow");
+                if(double.TryParse(Console.ReadLine(),out double amount))
+                {
+                    if(amount <= balance[CurrentAccount])
+                    {
+                        balance[CurrentAccount] -= amount;
+                        history[CurrentAccount].Add($"Withdrawn: -{amount}");
+                        Console.WriteLine("Please take your cash."); 
+                        
+                    }
+                    else { Console.WriteLine("Insufficient balance!"); }
+                }
+            }
+            else if(Choice == "6")
+            {
+                if (CurrentAccount == null) { Console.WriteLine("Please login first!"); continue; }
+                Console.WriteLine($"--- Transaction History for {username[CurrentAccount]} ---");
+                foreach (var record in history[CurrentAccount])
+                {
+                    Console.WriteLine(record);
+                }
+            }
+            else
+            {
+                CurrentAccount = null;
+                Console.WriteLine("Logged out safely. Goodbye!");
+            }
+             
+
+        }
+    }
+}
