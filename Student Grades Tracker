@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+enum GradeLevel
+{
+
+    Freshman,
+    Sophomore,
+    Junior,
+    Senior
+
+}
+
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+
+        int MaxStudent = 10;
+        Dictionary<string, List<int>> dict = new Dictionary<string, List<int>>();
+
+        for (int i = 1; i <= MaxStudent; i++)
+        {
+            Console.WriteLine($"Enter The Student {i} Name");
+            string student = Console.ReadLine();
+
+            Console.WriteLine($"Enter {student} grades");
+            List<int> grades = Console.ReadLine().Split(',').Select(int.Parse).ToList();
+            dict[student] = grades;
+            double average = grades.Average();
+        }
+        
+        GradeLevel Getlevel(double average)
+        {
+            if (average <20)
+                return GradeLevel.Freshman;
+            else if (average <40)
+                return GradeLevel.Sophomore;
+            else if (average <60)
+                return GradeLevel.Junior;
+            else
+                return GradeLevel.Senior;
+        }
+        StringBuilder report = new StringBuilder();
+        foreach(var r in dict)
+        {
+            string studentname= r.Key;
+            List<int> grades = r.Value;
+            double average = grades.Average();
+            GradeLevel level = Getlevel(average);
+            report.AppendLine($"{studentname}\t\t{average:F2}\t\t{level}");
+        }
+        Console.WriteLine(report.ToString());
+
+    }
+}
