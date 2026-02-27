@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Text;
+class post
+{
+    public DateTime _date { get; private set; }
+    public string _title { get; private set; }
+    public string _description { get; private set; }
+    private int _vote;
+
+    public int vote
+    {
+        get { return _vote; }
+    }
+
+    public int UpVote()
+    {
+        return _vote++;
+    }
+    public int DownVote()
+    {
+        return _vote--;
+
+    }
+    public post(DateTime date, string title, string description)
+    {
+        _date = date;
+        _title = title;
+        _description = description;
+        _vote = 0;
+    }
+}
+   
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+       post post1 = new post(DateTime.Now, "First Post", "This is the first post.");
+        do
+            {
+            Console.WriteLine($"Title: {post1._title}");
+            Console.WriteLine($"Description: {post1._description}");
+            Console.WriteLine($"Date: {post1._date}");
+            Console.WriteLine($"Votes: {post1.vote}");
+
+            Console.WriteLine(" Up Vote press 1, Down Vote press 2, Exit press 0");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            if (choice == 1)
+            {
+                post1.UpVote();
+            }
+            else if (choice == 2)
+            {
+                post1.DownVote();
+            }
+            else
+            {
+                return;
+            }
+
+            Console.Clear();
+        } while (true);
+    }
+    }
