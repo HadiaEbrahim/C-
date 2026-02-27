@@ -1,0 +1,84 @@
+//Assessment#1
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Text;
+class Student
+{
+    private int[] grades = new int[5] ;
+    // indexer definition
+    public int this[int index]
+    {
+        get
+        {
+            return grades[index];
+        }
+        set
+        {
+            grades[index] = value;
+        }
+    }
+}
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        Student student = new Student();
+        student[0] = 95;
+        student[1] = 88;
+        student[2] = 76;
+        student[3] = 92;
+        student[4] = 85;
+        Console.WriteLine("Student Grades:");
+        Console.WriteLine(student[0]);
+        Console.WriteLine(student[1]);
+        Console.WriteLine(student[2]);
+        Console.WriteLine(student[3]);
+        Console.WriteLine(student[4]);
+    }
+}
+
+//Assessment#2
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Text;
+class MyCookieCollection
+{
+    Dictionary<string, string> cookies = new Dictionary<string, string>();
+    // indexer definition
+    public string this[string key]
+    {
+        get
+        {
+            if (cookies.ContainsKey(key))
+            {
+                return cookies[key];
+            }
+            else
+            {
+                return null; // or throw an exception
+            }
+        }
+        set
+        {
+            cookies[key] = value;
+        }
+    }
+}
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+       MyCookieCollection myCookie = new MyCookieCollection();
+       myCookie["username"] = "hadia";
+       myCookie["theme"] = "dark";
+
+         Console.WriteLine($"Username: {myCookie["username"]}");
+        Console.WriteLine($"Theme: {myCookie["theme"]}");
+    }
+}
+
+
