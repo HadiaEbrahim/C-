@@ -1,0 +1,90 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Text;
+class Taskitem
+{
+    public string Name { get; set; }
+    public bool IsCompleted { get; set; }
+
+}
+class todoList
+{
+    private List<Taskitem> tasks = new List<Taskitem>();
+    public void AddTask()
+    {   
+        Console.WriteLine("Enter task name:");
+        string name = Console.ReadLine();
+        tasks.Add(new Taskitem { Name = name, IsCompleted = false });
+    }
+    public void MarkTaskAsCompleted()
+    {    
+        Console.WriteLine("Enter task name to mark as completed:");
+        string name = Console.ReadLine();
+        var task = tasks.FirstOrDefault(t => t.Name == name);
+        if (task != null)
+        {
+            task.IsCompleted = true;
+            Console.WriteLine($"Task '{name}' marked as completed.");
+        }
+    }
+    public void DisplayTasks()
+    { 
+        Console.WriteLine("your tasks:");
+        foreach (var task in tasks)
+        {
+            Console.WriteLine($"{task.Name} - {(task.IsCompleted ? "Completed" : "Pending")}");
+        }
+    }
+    public void RemoveTask()
+    {
+        Console.WriteLine("Enter task name to remove:");
+        string name = Console.ReadLine();
+        var task = tasks.FirstOrDefault(t => t.Name == name);
+        if (task != null)
+        {
+            tasks.Remove(task);
+        }
+    }
+    public void savetodolist(string filename)
+    {
+        using (var writer = new StreamWriter(filename))
+        {
+            foreach (var task in tasks)
+            {
+                writer.WriteLine($"{task.Name}|{task.IsCompleted}");
+            }
+        }
+    }
+    public void displayprogram()
+    {   
+        Console.WriteLine("Welcome to the To-Do List Application!");
+        Console.WriteLine("1. Add Task");
+        Console.WriteLine("2. Mark Task as Completed");
+        Console.WriteLine("3. Display Tasks");
+        Console.WriteLine("4. Remove Task");
+        Console.WriteLine("5. Save To-Do List");
+        Console.WriteLine("6. Exit");
+    }
+
+}
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+       todoList t= new todoList();
+       t.displayprogram();
+       while (true)
+        {
+            Console.WriteLine("Enter your chioce:");
+            int choice=int.Parse(Console.ReadLine());
+            if (choice == 1) { t.AddTask(); }
+            else if (choice == 2) { t.MarkTaskAsCompleted(); }
+            else if (choice == 3) { t.DisplayTasks(); }
+            else if (choice == 4) { t.RemoveTask(); }
+            else if (choice == 5) { t.savetodolist("todolist.txt"); }
+            else if (choice == 6) { break; }
+        }
+    }
+}
