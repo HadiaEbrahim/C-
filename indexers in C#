@@ -1,0 +1,155 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+class name
+{
+    private string[] names = new string[10];
+    // indexer definition
+    public string this[int index]
+    {
+        get
+        {
+            return names[index];
+        }
+        set
+        {
+            names[index] = value;
+        }
+    }
+}
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        // indexers: allows an object to be indexed like an array, but with custom logic for getting and setting values
+        //the object can be indexed using the array access operator ([ ]), just like arrays or collections.
+        //indexers are defined using the 'this' keyword followed by square brackets, and they can have parameters to specify the index.
+        name name = new name();
+        name[0] = "h";
+        name[1] = "a";
+        name[2] = "d";
+        name[3] = "i";
+        name[4] = "a";
+        for (int i = 0; i < 10; i++)
+        {
+            Console.Write(name[i]);
+
+
+        }
+         //indexers can be classified based on the number of parameters they accepted
+        // single parameter indexers: these indexers accept a single parameter ,
+       // which is typically used to access elements in a collection or array.
+      // The parameter can be of any type, such as int, string, or even a custom type
+      name [5] = "m";
+      name [6] = "n";
+      name [7] = "o";
+    }
+}
+
+//Multi-Parameter Indexers
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+class array
+{
+    private int[,] arrays = new int[3,3];
+    // indexer definition
+    public int this[int row,int col]
+    {
+        get
+        {
+            return arrays[row,col];
+        }
+        set
+        {
+            arrays[row,col]= value;
+        }
+    }
+}
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        // Multi-Dimensional Indexer : takes multiple parameters, similar to multi-dimensional arrays
+        array arr = new array();
+        arr[0, 0] = 1;
+        arr[0, 1] = 2;
+        arr[0, 2] = 3;
+        arr[1, 0] = 4;
+
+    }
+}
+
+//Overloading Indexers
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Text;
+class dataa
+{
+    private int[] data = new int[3] {20,30,40};
+    // indexer definition
+    public int this[int index]
+    {
+        get
+        {
+            return data[index];
+        }
+    }
+    public int this[string name]
+    {
+        get
+        {
+            if (name == "first")
+                return data[0];
+            else if (name == "second")
+                return data[1];
+            else if (name == "third")
+                return data[2];
+            else
+                throw new ArgumentException("Invalid index name");
+        }
+    }
+}
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        //Overloading Indexers:Just like methods, indexers can be overloaded using different parameter types or counts.
+        dataa data = new dataa();
+        Console.WriteLine(data[0]); // Output: 20
+        Console.WriteLine(data["first"]);
+    }
+}
+
+//  Read-Only Indexers
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Text;
+class dataa
+{
+    private int[] data = new int[3] {20,30,40};
+    // indexer definition
+    public int this[int index]
+    {
+        get
+        {
+            return data[index];
+        }
+    }
+}
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        //Read-Only Indexers :If only a get accessor is defined, the indexer becomes read-only.
+        dataa d = new dataa();
+        Console.WriteLine(d[2]);
+    }
+}
+
