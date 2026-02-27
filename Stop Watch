@@ -1,0 +1,85 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Text;
+class Stopwatch
+{
+    private DateTime _startTime;
+    private DateTime _endTime;
+    private bool _isRunning;
+
+    public void Start()
+    {
+        if (_isRunning)
+        {
+            Console.WriteLine("Stopwatch is already running.");
+            return;
+        }
+        else
+        {
+            _isRunning = true;
+            _startTime = DateTime.Now;
+            Console.WriteLine("Stopwatch started.");
+        }
+    }
+    public void Stop()
+    {
+        if (_isRunning)
+        {
+            _isRunning = false;
+            _endTime = DateTime.Now;
+            Console.WriteLine("Stopwatch stopped.");
+        }
+        else
+        {
+            Console.WriteLine("Stopwatch is not running.");
+        }
+    }
+    public double duration()
+    {
+        if (!_isRunning) {
+            TimeSpan duration = _endTime - _startTime;
+            return duration.TotalSeconds;
+        }
+        else
+        {
+            Console.WriteLine("Stopwatch is still running. Please stop it to get the duration.");
+            return 0;
+        }
+    }
+
+}
+
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+       Stopwatch watch = new Stopwatch();
+        Console.WriteLine("To start press 0.");
+        Console.WriteLine("To stop press 1.");
+        Console.WriteLine("To get duration press 2.");
+        Console.WriteLine("To exit press 3.");
+
+        while (true)
+        {
+            int choice = int.Parse(Console.ReadLine());
+            if (choice == 0) {
+                watch.Start();
+            }
+            else if (choice == 1) {
+                watch.Stop();
+            }
+            else if (choice == 2) {
+                Console.WriteLine($"Duration: {watch.duration()} seconds");
+            }
+            else if (choice == 3) {
+                Console.WriteLine("Exiting...");
+                break;
+            }
+            else {
+                Console.WriteLine("Invalid choice. Please try again.");
+            }
+        }
+    }
+}
