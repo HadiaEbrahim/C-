@@ -1,0 +1,23 @@
+using System;
+using System.Collections;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Text;
+
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        //Boxing: It is a process that converts a Value Type variable into a Reference Type variable.
+        int i = 10; // Value Type
+        object box = i; // Boxing: Value Type 'i' is boxed into Reference Type
+
+        //Unboxing: It is a process that converts a Reference Type variable back into a Value Type variable.
+
+        int unbox = (int)box; // Unboxing: Reference Type 'box' is unboxed back into Value Type 'unbox'
+
+        Console.WriteLine(box);
+        Console.WriteLine(unbox);
+
+    }
+}
