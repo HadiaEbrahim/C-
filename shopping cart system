@@ -1,0 +1,109 @@
+using System;
+using System.Collections;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Text;
+class product
+{
+    public string Name { get; }
+    public string Description { get; }
+    public decimal Price { get; }
+    public int Quantity { get; }
+    public product(string name, string description, decimal price, int quantity)
+    {
+        Name = name;
+        Description = description;
+        Price = price;
+        Quantity = quantity;
+    }
+    public void CalculatetotslPrice(int discount,int quantity)
+    {
+        if (discount > 0)
+        {
+            double discountedPrice = (double)Price * (1 - (discount / 100.0))*Quantity;
+            Console.WriteLine($"The discounted price of {Name} is: {discountedPrice}");
+        }
+        else
+        {
+            Console.WriteLine($"No discount applied. The price of {Name} is: {Price}");
+        }
+    }
+    public  virtual void displayInfo()
+    {
+        Console.WriteLine($"Product Name: {Name}");
+        Console.WriteLine($"Description: {Description}");
+        Console.WriteLine($"Price: {Price:C}");
+        Console.WriteLine($"Quantity: {Quantity}");
+    }
+}
+class car : product
+{
+    public string Make { get; }
+    public string Model { get; }
+    public int Year { get; }
+    public car(string name, string description, decimal price, int quantity, string make, string model, int year)
+        : base(name, description, price, quantity)
+    {
+        Make = make;
+        Model = model;
+        Year = year;
+    }
+    public override void displayInfo()
+    {
+        base.displayInfo();
+        Console.WriteLine($"Make: {Make}");
+        Console.WriteLine($"Model: {Model}");
+        Console.WriteLine($"Year: {Year}");
+    }
+}
+class book : product
+{
+    public string Author { get; }
+    public string Genre { get; }
+    public int Pages { get; }
+    public book(string name, string description, decimal price, int quantity, string author, string genre, int pages)
+        : base(name, description, price, quantity)
+    {
+        Author = author;
+        Genre = genre;
+        Pages = pages;
+    }
+    public override void displayInfo()
+    {
+        base.displayInfo();
+        Console.WriteLine($"Author: {Author}");
+        Console.WriteLine($"Genre: {Genre}");
+        Console.WriteLine($"Pages: {Pages}");
+    }
+}
+class Cart
+{
+    Dictionary<string, product> products = new Dictionary<string, product>();
+    public void AddProduct(product product, int quantity, int discount) {
+        products[product.Name] = product;
+        products[product.Name].CalculatetotslPrice(discount, quantity);
+
+    }
+    public void DisplayCart()
+    {
+        foreach (var product in products.Values)
+        {
+            product.displayInfo();
+        }
+    }
+}
+
+
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+       Cart cart = new Cart();
+        car car1 = new car("Car1", "A nice car", 20000m, 1, "Toyota", "Camry", 2020);
+        book book1 = new book("Book1", "An interesting book", 15.99m, 2, "Author A", "Fiction", 300);
+        cart.AddProduct(car1, 10, 1);
+        cart.AddProduct(book1, 5, 2);
+        cart.DisplayCart();
+
+    }
+}
