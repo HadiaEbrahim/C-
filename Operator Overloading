@@ -1,0 +1,47 @@
+using System;
+using System.Collections;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Text;
+
+//Operator Overloading: the ability to use the same operator to do various operations.
+//In C#, you can overload most of the built-in operators, such as +, -, *, /, ==, !=, <, >, etc.
+//To overload an operator, you need to define a method with the appropriate signature and use the 'operator' keyword.
+//Overloading Unary Operators
+class numbers
+{
+    public int num1;
+    public int num2;
+
+    public numbers(int number1, int number2)
+    {
+        num1 = number1;
+        num2 = number2;
+    }
+
+    public static numbers operator -(numbers n1)
+    {
+        n1.num1 = -n1.num1;
+        n1.num2 = -n1.num2;
+        return n1;
+    }
+    //Overloading Binary Operators
+    public static numbers operator +(numbers n1)
+    {
+        n1.num1 = +n1.num1;
+        n1.num2 = +n1.num2;
+        return n1;
+    }
+}
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        numbers num= new numbers(10,20);
+        num = -num;
+        Console.WriteLine(num.num1);
+        Console.WriteLine(num.num2);
+        num = +num;
+        Console.WriteLine(num.num1);
+    }
+}
