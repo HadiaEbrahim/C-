@@ -1,0 +1,45 @@
+using System;
+//The ArrayList is defined under System.Collections namespace.
+//So, when you use Arraylist in your program you must add System.Collections namespace.
+using System.Collections;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Text;
+
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        //Create an ArrayList using ArrayList class
+        ArrayList arrayList = new ArrayList();
+        //Add elements to the ArrayList using Add() method
+        arrayList.Add(1);
+        arrayList.Add(2);
+        arrayList.Add(null);
+        arrayList.Add(3.77);
+        arrayList.Add("Hello");
+        //Display the elements of the ArrayList using foreach loop
+        foreach (var item in arrayList)
+        {
+            Console.WriteLine(item);
+        }
+        //Remove an element from the ArrayList using Remove() method
+        arrayList.Remove(2);
+        arrayList.RemoveAt(0);
+        arrayList.RemoveRange(0, 2);
+        //find the index of an element in the ArrayList using IndexOf() method
+        int index = arrayList.IndexOf(3.77);
+        Console.WriteLine(index);
+        //find the capacity of the ArrayList using Capacity property
+        Console.WriteLine(arrayList.Count);
+        Console.WriteLine(arrayList.Capacity);
+
+        //sort the ArrayList using Sort() method : quick sort algorithm is used to sort the elements of the ArrayList.
+        arrayList.Sort();
+         foreach (var item in arrayList)
+        {
+            Console.WriteLine(item);
+        }
+
+    }
+}
