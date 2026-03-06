@@ -1,0 +1,147 @@
+using System;
+using System.Collections;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Text;
+
+class Bank
+{
+    private int _AccountNumber;
+    private int _OwnerNumber;
+    private double _Balance;
+    private DateTime _CreatedDate { get; set; }
+
+
+    public int AccountNumber
+    {   
+        get { return AccountNumber; }
+    }
+    public double Balance
+    {
+        get { return _Balance; }
+    }
+     public int OwnerNumber
+     {
+        get { return OwnerNumber; }
+      
+     }
+     public DateTime CreatedDate
+      {
+        get { return CreatedDate; }
+            
+      }
+
+
+    public Bank(int accountNumber, int ownerNumber, int balance, DateTime createdDate)
+    {
+        if (accountNumber < 0)
+        {
+            throw new ArgumentException("Account number cannot be negative.");
+        }
+        if (ownerNumber < 0)
+        {
+            throw new ArgumentException("Owner number cannot be negative.");
+        }
+        if (balance < 0)
+        {
+            throw new ArgumentException("Balance cannot be negative.");
+        }
+        if (createdDate > DateTime.Now)
+        {
+            throw new ArgumentException("Created date cannot be in the future.");
+        }
+        this._AccountNumber = accountNumber;
+        this._OwnerNumber = ownerNumber;
+        this._Balance = balance;
+        this._CreatedDate = createdDate;
+    }
+
+    public virtual void DebositeMoney(double money)
+    {
+        if (money < 0)
+        {
+            throw new ArgumentException("Balance cannot be negative.");
+        }
+        else
+        {
+            _Balance += money;
+        }
+    }
+    public virtual void WithdrawMoney(double money)
+    {
+        if (money < 0)
+        {
+            throw new ArgumentException("Balance cannot be negative.");
+        }
+        else if (money > _Balance)
+        {
+            throw new ArgumentException("Not enough balance.");
+        }
+        else
+        {
+            _Balance -= money;
+        }
+    }
+    public virtual void ShowAccountDatails()
+    {
+        Console.WriteLine("Account Details:");
+        Console.WriteLine($"Account Number: {_AccountNumber}");
+        Console.WriteLine($"Owner Number: {_OwnerNumber}");
+        Console.WriteLine($"Balance: {_Balance}");
+        Console.WriteLine($"Created Date: {_CreatedDate}");
+    }
+
+}
+class SavingAccount : Bank
+{
+    private double _InterestRate=5;
+    
+    public SavingAccount(int accountNumber, int ownerNumber, int balance, DateTime createdDate, double interestRate=5)
+        : base(accountNumber, ownerNumber, balance, createdDate)
+    {
+        if (interestRate < 0)
+        {
+            throw new ArgumentException("Interest rate cannot be negative.");
+        }
+        this._InterestRate = interestRate;
+
+    }
+    public void CalculateInterest()
+    {
+        double interest = Balance * _InterestRate / 100;
+        DebositeMoney(interest);
+    }
+    public override void ShowAccountDatails()
+    {
+        base.ShowAccountDatails();
+        Console.WriteLine($"Interest Rate: {_InterestRate}%");
+    }
+    public override void WithdrawMoney(double money)
+    {
+        if (money < 0)
+        {
+            throw new ArgumentException("Balance cannot be negative.");
+        }
+        else if (money > Balance)
+        {
+            throw new ArgumentException("Not enough balance.");
+        }
+        else
+        {
+            base.WithdrawMoney(money);
+            Console.WriteLine($"Withdrawn: {money}");
+        }
+    }
+    public override void DebositeMoney(double money)
+    {
+        if (money < 0)
+        {
+            throw new ArgumentException("Balance cannot be negative.");
+        }
+        else
+        {
+            base.DebositeMoney(money);
+            Console.WriteLine($"Deposited: {money}");
+        }
+    }
+}
