@@ -1,0 +1,127 @@
+using System;
+using System.Collections;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Text;
+
+class vehicle
+{
+    public virtual void drive()
+    {
+        Console.WriteLine("The vehicle is driving.");
+    }
+    public virtual void fly()
+    {
+        Console.WriteLine("The vehicle is flying.");
+    }
+}
+class car : vehicle
+{
+    public override void drive()
+    {
+        Console.WriteLine("The car is driving.");
+    }
+    
+}
+class Airplane : vehicle
+{
+    
+    public override void fly()
+    {
+        Console.WriteLine("The airplane is flying.");
+    }
+}
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        vehicle myVehicle = new vehicle();
+        myVehicle.drive(); // Output: The vehicle is driving.
+        myVehicle.fly();   // Output: The vehicle is flying.
+        car myCar = new car();
+        myCar.drive(); // Output: The car is driving.
+       
+        Airplane myAirplane = new Airplane();
+        
+        myAirplane.fly();   // Output: The airplane is flying.
+
+
+    }
+}
+
+________________________________________________________________________________________________________________________________________________________________
+using System;
+using System.Collections;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Text;
+
+public interface ICanDrive
+{
+     void Drive();
+}
+public interface ICanFly
+{
+     void Fly(); 
+}
+
+class Car : ICanDrive
+{
+    public void Drive()
+    {
+        Console.WriteLine("Car is driving");
+    }
+}
+class Airplane : ICanFly
+{
+    public void Fly()
+    {
+        Console.WriteLine("Airplane is flying");
+    }
+}
+    internal class Program
+{
+    private static void Main(string[] args)
+    {
+        Car car = new Car();
+        car.Drive();
+        Airplane airplane = new Airplane();
+        airplane.Fly();
+    }
+}
+________________________________________________________________________________________________________________________________________________________________
+using System;
+using System.Collections;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Text;
+
+public interface IUthenication
+{
+    bool Authenticate();
+}
+class Mail: IUthenication
+{
+    public bool Authenticate()
+    {
+        Console.WriteLine("Mail Authentication");
+        return true;
+    }
+}
+class Google: IUthenication
+{
+    public bool Authenticate()
+    {
+        Console.WriteLine("Google Authentication");
+        return true;
+    }
+}
+
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        
+    }
+}
+__________________________________________________________________________________________________________________________________________________________________
