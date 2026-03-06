@@ -1,0 +1,147 @@
+using System;
+using System.Collections;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Net.Mail;
+using System.Text;
+
+public interface IInvoice
+{
+    void Format();
+}
+class product
+{
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public decimal Price { get; set; }
+
+    public product(string name, string description, decimal price)
+    {
+        Name = name;
+        Description = description;
+        Price = price;
+    }
+    
+}
+class OrderItem : product
+{
+    public int quantity { get; set; }
+    public OrderItem(string name, string description, decimal price, int quantity) : base(name, description, price)
+    {
+        this.quantity = quantity;
+    }
+
+}
+class Order 
+{
+    
+    public List<OrderItem> orderItems { get; set; }
+    public DateTime Date { get; set; }
+}
+class PDF : IInvoice
+{
+    public void Format()
+    {
+        Console.WriteLine("Format PDF");
+    }
+}
+class Excel : IInvoice
+{
+    public void Format()
+    {
+        Console.WriteLine("Format Excel");
+    }
+}
+class JSON : IInvoice
+{
+    public void Format()
+    {
+        Console.WriteLine("Format JSON");
+    }
+}
+class console:IInvoice 
+{
+        public List<OrderItem> orderItems { get; set; }
+        public console(List<OrderItem> orderItems)
+        {
+            this.orderItems = orderItems;
+        }
+    public void Format()
+    {
+        Console.WriteLine($"Date Time {DateTime.Now}");
+        foreach (var item in orderItems)        
+        {
+            Console.WriteLine($"Name: {item.Name}, Description: {item.Description}, Price: {item.Price}, Quantity: {item.quantity}");
+        }
+        
+    }
+}
+
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        Order order = new Order();
+        int exit = 1;
+        do
+        {
+            Console.WriteLine("enter tn=he product nmumber and quantity");
+            Console.WriteLine("enter 1 to car");
+            Console.WriteLine("enter 2 to bike");
+            Console.WriteLine("enter 3 to bus");
+            int choice = int.Parse(Console.ReadLine());
+            int quantity = int.Parse(Console.ReadLine());
+            if (choice == 1)
+            {
+                product car = new product("car", "a vehicle with four wheels", 20000);
+                OrderItem orderItem = new OrderItem(car.Name, car.Description, car.Price, quantity);
+                order.orderItems = new List<OrderItem>();
+                order.orderItems.Add(orderItem);
+            }
+            else if (choice == 2)
+            {
+                product bike = new product("bike", "a vehicle with two wheels", 1000);
+                OrderItem orderItem = new OrderItem(bike.Name, bike.Description, bike.Price, quantity);
+                order.orderItems = new List<OrderItem>();
+                order.orderItems.Add(orderItem);
+            }
+            else if (choice == 3)
+            {
+                product bus = new product("bus", "a vehicle with six wheels", 50000);
+                OrderItem orderItem = new OrderItem(bus.Name, bus.Description, bus.Price, quantity);
+                order.orderItems = new List<OrderItem>();
+                order.orderItems.Add(orderItem);
+            }
+            Console.WriteLine("enter the format of invoice");
+            Console.WriteLine("enter 1 for PDF");
+            Console.WriteLine("enter 2 for Excel");
+            Console.WriteLine("enter 3 for JSON");
+            Console.WriteLine("enter 4 for console");
+            int choice2 = int.Parse(Console.ReadLine());
+            if (choice2 == 1)
+            {
+                PDF pdf = new PDF();
+                pdf.Format();
+            }
+            else if (choice2 == 2)
+            {
+                Excel excel = new Excel();
+                excel.Format();
+            }
+            else if (choice2 == 3)
+            {
+                JSON json = new JSON();
+                json.Format();
+            }
+            else if (choice2 == 4)
+            {
+                console console = new console(order.orderItems);
+                console.Format();
+            }
+            Console.WriteLine("enter  0 to exit");
+            exit = int.Parse(Console.ReadLine());
+
+        } while (exit != 0);
+
+    }
+}
