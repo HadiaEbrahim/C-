@@ -1,0 +1,53 @@
+CREATE DATABASE Library;
+Use Library;
+Create Table Clients(
+    ClientID int Primary key Identity(1,1),
+    Name varchar(255) Not Null ,
+    Email varchar(255) Not Null Unique,
+    Age int check (Age>=16),
+    JoinDate Date Default Getdate()
+   
+);
+Create Table Author(
+   AuthorID int primary key identity(1,1),
+   AutherName varchar(255) not null ,
+
+ );
+Create Table Books(
+   BookID int primary key identity(1,1),
+   BookeName varchar(255) not null,
+   Category varchar(255) not null,
+   price int check(price>0),
+   Status varchar(255) Default 'Available',
+   AuthorID int,
+   foreign key (AuthorID) REFERENCES Author (AuthorID)
+);
+
+Create Table Borrowing (
+     BorrowID int primary key identity(1,1),
+     BookID INT,
+     ClientID INT,
+     BorrowDate DATE DEFAULT GETDATE(),
+     ReturnDate DATE NULL, 
+    FOREIGN KEY (BookID) REFERENCES Books(BookID),
+    FOREIGN KEY (ClientID) REFERENCES Clients(ClientID)
+
+);
+
+insert into Clients (Name,Email,Age)
+Values ('hadia','hadia@gmail.com',19),
+       ('Ahmed','Ahmed@gmail.com',27),
+       ('hadeer','hadeer@gmail.com',24);
+insert into Author (AutherName)
+Values ('ali'),('Mahmoud');
+
+INSERT INTO Books (BookeName, AuthorID, Category,price) VALUES 
+('Clean Code', 1, 'programming',55),
+('The Pragmatic Programmer', 2, 'programming',60);
+
+INSERT INTO Borrowing (BookID, ClientID, BorrowDate) 
+VALUES (1, 1, '2026-03-10');
+
+SELECT TOP(3) BookeName 
+FROM Books 
+ORDER BY BookID DESC;
