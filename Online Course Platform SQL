@@ -1,0 +1,47 @@
+CREATE DATABASE OnlineCoursePlatform;
+Use OnlineCoursePlatform;
+Create Table Students(
+    StudentID int Primary key Identity(1,1),
+    Name varchar(255) Not Null ,
+    Email varchar(255) Not Null Unique,
+    Age int check (Age>=16),
+    country varchar(255) Default'Egypt'
+);
+Create Table Courses(
+   CourseID int primary key identity(1,1),
+   CourseName varchar(255) not null,
+   Category varchar(255) not null,
+   price int check(price>0)
+);
+Create Table Enrollment(
+   EnrollmentID int primary key identity(1,1),
+   StudentID int ,
+   CourseID  int,
+   EnrollDate Date Default Getdate(),
+   foreign key (StudentID) REFERENCES Students (StudentID),
+   foreign key (CourseID) REFERENCES Courses (CourseID)
+
+ );
+ 
+ insert into Students (Name,Email,Age)
+ Values ('hadia','hadia@gmail.com',19),('ali','ali@gmail.com',20);
+
+ insert into Courses(CourseName,Category,price)
+ Values ('journy to CS','programing',4500),('DS','programing',5000);
+
+ insert into Enrollment (StudentID,CourseID)
+ Values (1,1),(2,2);
+
+ Select* from Students Where Country='USA';
+ Select* From Students Where Age Between 20 And 30;
+
+ Alter Table Students 
+ ADD CreatedDate Date default Getdate(); 
+
+ Alter Table Courses 
+ RENAME Column price to Course_price;  --  جايب ايرور مش عارفه ليه مش بيدعم RENEME
+
+ EXEC sp_rename 'Courses.price',
+ 'Course_price','COLUMN';     -- جايب ايرور برده 
+
+Select top(3) * From Enrollment ;
