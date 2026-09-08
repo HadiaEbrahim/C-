@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 class post
 {
-    public DateTime _date { get; private set; }
-    public string _title { get; private set; }
-    public string _description { get; private set; }
+    public DateTime Date { get; private set; }
+    private string _title;
+    private string _description;
     private int _vote;
 
     public int vote
@@ -24,27 +24,24 @@ class post
         return _vote--;
 
     }
-    public post(DateTime date, string title, string description)
-    {
-        _date = date;
-        _title = title;
-        _description = description;
-        _vote = 0;
-    }
+   
     public string Description
     {
+        get { return _description ; }
         set
         {
             if (string.IsNullOrEmpty(value))
             {
                 throw new ArgumentException("value cannot be null or empty");
+                
             }
             _description = value;
         }
 
     }
-    public string  Title
+    public string Title
     {
+        get { return _title; }
         set
         {
             if (string.IsNullOrEmpty(value))
@@ -55,6 +52,13 @@ class post
 
         }
     }
+    public post(DateTime date, string title, string description)
+    {
+        Date = date;
+        Title = title;
+        Description = description;
+        _vote = 0;
+    }
 }
 
 internal class Program
@@ -64,9 +68,9 @@ internal class Program
         post post1 = new post(DateTime.Now, "First Post", "This is the first post.");
         do
         {
-            Console.WriteLine($"Title: {post1._title}");
-            Console.WriteLine($"Description: {post1._description}");
-            Console.WriteLine($"Date: {post1._date}");
+            Console.WriteLine($"Title: {post1.Title}");
+            Console.WriteLine($"Description: {post1.Description}");
+            Console.WriteLine($"Date: {post1.Date}");
             Console.WriteLine($"Votes: {post1.vote}");
 
             Console.WriteLine(" Up Vote press 1, Down Vote press 2, Exit press 0");
@@ -83,6 +87,11 @@ internal class Program
             {
                 return;
             }
+
+            Console.Clear();
+        } while (true);
+    }
+}
 
             Console.Clear();
         } while (true);
