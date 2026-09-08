@@ -31,15 +31,39 @@ class post
         _description = description;
         _vote = 0;
     }
+    public string Description
+    {
+        set
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new ArgumentException("value cannot be null or empty");
+            }
+            _description = value;
+        }
+
+    }
+    public string  Title
+    {
+        set
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new ArgumentException("value cannot be null or empty");
+            }
+            _title = value;
+
+        }
+    }
 }
-   
+
 internal class Program
 {
     private static void Main(string[] args)
     {
-       post post1 = new post(DateTime.Now, "First Post", "This is the first post.");
+        post post1 = new post(DateTime.Now, "First Post", "This is the first post.");
         do
-            {
+        {
             Console.WriteLine($"Title: {post1._title}");
             Console.WriteLine($"Description: {post1._description}");
             Console.WriteLine($"Date: {post1._date}");
@@ -63,4 +87,4 @@ internal class Program
             Console.Clear();
         } while (true);
     }
-    }
+}
